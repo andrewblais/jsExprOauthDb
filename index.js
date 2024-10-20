@@ -155,7 +155,7 @@ let bookNotFoundBool = false;
 
 // Route to display the web app's home page.
 // Queries the database for book recommendations:
-app.get("/booklist", async (req, res) => {
+app.get("/", async (req, res) => {
     // View book list only if user registered/signed in:
     // NEW:
     if (req.isAuthenticated()) {
@@ -164,7 +164,7 @@ app.get("/booklist", async (req, res) => {
                 "SELECT * from book_recommendations ORDER by id ASC"
             );
             const bookDBArray = bookDBQuery.rows;
-            res.render("booklist.ejs", {
+            res.render("index.ejs", {
                 /* ↓↓ FOR LOCAL TESTING w/ARRAY INSTEAD OF DATABASE: ↓↓
             // bookRecommendations: book_test_array,
             */
@@ -179,12 +179,12 @@ app.get("/booklist", async (req, res) => {
         }
     } else {
         // Prompt user to log in if not registered/signed in:
-        res.redirect("/");
+        res.redirect("/login");
     }
 });
 
 // Route to display the web app's login page: // NEW
-app.get("/", (req, res) => {
+app.get("/login", (req, res) => {
     res.render("login.ejs");
 });
 
@@ -203,9 +203,9 @@ app.get(
 
 // NEW:
 app.get(
-    "/auth/google/booklist",
+    "/auth/google/",
     passport.authenticate("google", {
-        successRedirect: "/booklist",
+        successRedirect: "/",
         failureRedirect: "/login",
     })
 );
@@ -214,16 +214,16 @@ app.get(
 app.get("/logout", (req, res) => {
     req.logout((err) => {
         if (err) console.log(err);
-        res.redirect("/");
+        res.redirect("/login");
     });
 });
 
 // NEW:
 app.post(
-    "/",
+    "/login",
     passport.authenticate("local", {
-        successRedirect: "/booklist",
-        failureRedirect: "/",
+        successRedirect: "/",
+        failureRedirect: "/login",
     })
 );
 
@@ -240,7 +240,7 @@ app.post("/register", async (req, res) => {
 
         if (checkResult.rows.length > 0) {
             res.send("Email already exists. Try logging in.");
-            res.redirect("/");
+            res.redirect("/login");
         } else {
             // Password hashing:
             bcrypt.hash(password, saltRounds, async (err, hash) => {
@@ -254,7 +254,7 @@ app.post("/register", async (req, res) => {
                     const user = result.rows[0];
                     req.login(user, (err) => {
                         console.log("User successfully registered!");
-                        res.redirect("/booklist");
+                        res.redirect("/");
                     });
                 }
             });
@@ -352,13 +352,13 @@ app.post("/add", async (req, res) => {
             });
         */
 
-            res.redirect("/booklist");
+            res.redirect("/");
         } catch (error) {
             console.error("POST '/add' error:", error);
             res.status(500).send("Internal Server Error");
         }
     } else {
-        res.redirect("/");
+        res.redirect("/login");
     }
 });
 
@@ -433,9 +433,9 @@ app.post("/edit", async (req, res) => {
             console.error("POST '/edit' error:", error);
             res.status(500).send("Internal Server Error");
         }
-        res.redirect("/booklist");
-    } else {
         res.redirect("/");
+    } else {
+        res.redirect("/login");
     }
 });
 
@@ -458,9 +458,9 @@ app.post("/delete", async (req, res) => {
             console.error("POST '/delete' error:", error);
             res.status(500).send("Internal Server Error");
         }
-        res.redirect("/booklist");
-    } else {
         res.redirect("/");
+    } else {
+        res.redirect("/login");
     }
 });
 
@@ -473,7 +473,7 @@ passport.use(
         // console.log(username);
         try {
             const result = await db.query(
-                "SELECT * FROM book_recommendations where user_email = $1",
+                "SELECT * FROM users where user_email = $1",
                 [userEmail]
             );
             if (result.rows.length > 0) {
@@ -511,7 +511,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: "http://localhost:3000/auth/google/booklist",
+            callbackURL: "http://localhost:3000/auth/google/",
             userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
         },
         async (accessToken, refreshToken, profile, cb) => {
