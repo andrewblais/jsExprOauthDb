@@ -1,4 +1,4 @@
-# **jsCapstoneBook**
+# **jsExprOauthDb**
 
 _A Node.js Web App where users add books and comments to a reading club list. Capstone Project completed for Angela Yu's Udemy Web Development Bootcamp._
 
@@ -10,7 +10,7 @@ _A Node.js Web App where users add books and comments to a reading club list. Ca
 
     -   https://www.postgresql.org/
 
--   Fork/download this repository, `jsCapstoneBook`.
+-   Fork/download this repository, `jsExprOauthDb`.
 
 -   Here are the standard steps/commands I intially use to create the Node.js/Express project...
 
@@ -216,7 +216,7 @@ git commit -m "first commit"
 git branch -M main
 
 # Add a remote repository with the name `origin` pointing to the specified GitHub URL:
-git remote add origin https://github.com/andrewblais/jsCapstoneBook.git
+git remote add origin https://github.com/andrewblais/jsExprOauthDb.git
 
 # Push the `main` branch to the `origin` remote, and set `origin/main` as the upstream branch:
 git push -u origin main
