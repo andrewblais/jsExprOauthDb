@@ -1,13 +1,9 @@
 <%- include('partials/header.ejs'); -%>
 
-<div class="heading" id="heading">
-    <h1><a href="/" class="home-link">Summer Book Club</a></h1>
-</div>
-
 <h2>Add Book to List</h2>
 
 <div class="flex-form-element">
-    <!-- *** ADDd BOOK FORM *** -->
+    <!-- *** ADD BOOK FORM *** -->
     <form action="/add" method="post" id="add-form">
         <!-- *** FORM INPUT FOR BOOK TITLE *** -->
         <div class="form-item">
@@ -63,8 +59,9 @@
         <!-- *** DISPLAY ERROR MESSAGE IF BOOK IS NOT FOUND *** -->
         <!-- *** OTHERWISE PROMPT USER FOR INPUT *** -->
         <% if (bookNotFound) {%>
-        <h4 id="user-instruction" class="warning-text">
-            Book Not Found.<br />Try Again!
+            <h4 id="user-instruction" class="warning-text">
+                <!-- Book Not Found.<br />Try Again! -->
+            Book Not Found Online.<br />Adding Just Your Data.
         </h4>
         <% } else { %>
         <h4 id="user-instruction">enter title or isbn</h4>

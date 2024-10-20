@@ -71,6 +71,8 @@ html {
 }
 
 input[type="text"],
+input[type="password"],
+input[type="email"],
 textarea {
     background-color: darkslateblue;
     border: 0.4rem mediumvioletred;
@@ -81,7 +83,9 @@ textarea {
     width: 80%;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"],
+input[type="email"] {
     font-size: 1.15rem;
     font-weight: 200;
     height: 1.5rem;
@@ -256,8 +260,31 @@ textarea::placeholder {
     padding: 0.5rem 0.75rem 1rem;
 }
 
-.form-item {
+.top-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1vh 2vw;
+}
+
+.top-link {
+    color: moccasin;
+    flex: 0 0 auto;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 1px 1px 2px mediumvioletred, 0 0 1rem darkslateblue,
+        0 0 0.15rem darkslateblue;
+}
+
+.form-item,
+.google {
     margin: 1.5rem auto 1rem;
+}
+
+.google a {
+    font-size: 1.25rem;
+    text-decoration: none;
 }
 
 .heading {
