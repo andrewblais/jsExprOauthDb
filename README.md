@@ -1,5 +1,7 @@
 # **jsExprOauthDb**
 
+_JavaScript project demonstrating a Node.js Express Web App/Server with Database integration. Includes both Local and Google OAuth authentication. Capstone Project completed for Angela Yu's Udemy Web Development Bootcamp, incorporating original project with later lesson on authentication strategies._
+
 ## **_November 2024 Changes:_**
 
 -   Project name changed from `jsCapstoneBook` to `jsExprOauthDb` to express the important aspects of the project.
@@ -46,8 +48,6 @@ jsExpressOauthDb
 ├───package.json
 └───README.md
 ```
-
-_A Node.js Web App where users add books and comments to a reading club list. Capstone Project completed for Angela Yu's Udemy Web Development Bootcamp._
 
 ## **_First Steps:_**
 
@@ -302,4 +302,5 @@ _Andrew Blais, September 1, 2024_
 -   A screenshot of the Web Application's destination page:
 
 ![screenshot](public/images/webAppScreenshot.jpg)
+
 # jsExprOauthDb
