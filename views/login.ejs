@@ -1,0 +1,37 @@
+<%- include('partials/header.ejs'); -%>
+
+<div class="heading" id="heading">
+    <h2>Login</h2>
+</div>
+
+<div class="flex-form-element">
+    <form action="/" method="POST">
+        <div class="form-item">
+            <label for="email">Email:</label><br />
+            <input
+                type="email"
+                name="username"
+                placeholder="name@email.com"
+                autofocus="true"
+                autocomplete="off" /><br />
+        </div>
+        <div class="form-item">
+            <label for="password">Password:</label><br />
+            <input
+                type="password"
+                name="password"
+                placeholder="password123"
+                autocomplete="off" /><br />
+        </div>
+        <input class="buttons" type="submit" value="Sign In" />
+    </form>
+</div>
+
+<div class="google">
+    <a href="/auth/google" class="top-link" role="button">
+        <i class="fa-brands fa-google top-link"></i>
+        Sign in via Google
+    </a>
+</div>
+
+<%- include('partials/footer.ejs') %>
