@@ -49,6 +49,8 @@ jsExpressOauthDb
 └───README.md
 ```
 
+# **_Description of Project Creation:_**
+
 ## **_First Steps:_**
 
 -   Download and setup the software required for a local database:
