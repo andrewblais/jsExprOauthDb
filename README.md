@@ -1,238 +1,150 @@
-# **jsExprOauthDb**
+# 🔐 jsExprOauthDb
 
-_JavaScript project demonstrating a Node.js Express Web App/Server with Database integration. Includes both Local and Google OAuth authentication. Capstone Project completed for Angela Yu's Udemy Web Development Bootcamp, incorporating original project with later lesson on authentication strategies._
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![License](https://img.shields.io/github/license/andrewblais/jsExprOauthDb)
+![Built With](https://img.shields.io/badge/Built%20With-Node.js%20%7C%20Express%20%7C%20PostgreSQL%20%7C%20OAuth-green)
+![Status](https://img.shields.io/badge/status-capstone--complete-lightgrey)
 
-## **_November 2024 Changes:_**
+A Node.js + Express web application demonstrating full-stack database integration with local and Google OAuth authentication strategies via Passport.js. This capstone project was completed for Angela Yu’s [Web Development Bootcamp](https://www.udemy.com/course/the-complete-web-development-bootcamp/), combining earlier CRUD/database lessons with more advanced authentication topics.
 
--   Project name changed from `jsCapstoneBook` to `jsExprOauthDb` to express the important aspects of the project.
+---
 
--   Incorporated `"passport-local"` and `"passport-google-oauth20"` authentication strategies.
+## 📚 Table of Contents
 
-    -   See `./docs/notesOnOauth.ipynb` for info on this process.
+-   [November 2024 Changes](#-november-2024-changes)
+-   [Project Structure](#-project-structure)
+-   [Installation](#-installation--getting-started)
+-   [Database Setup](#-database-setup)
+-   [Development Process](#-development-process)
+-   [Thoughts & Reflections](#-thoughts--reflections)
+-   [Author](#-andrew-blais)
 
-## **_Project Structure:_**
+---
+
+## 🗓 November 2024 Changes
+
+-   Project renamed from `jsCapstoneBook` → `jsExprOauthDb` for clarity
+-   Added Passport strategies:
+    -   `passport-local`
+    -   `passport-google-oauth20`
+-   Notes on authentication are documented in [`./docs/notesOnOauth.ipynb`](./docs/notesOnOauth.ipynb)
+
+---
+
+## 🗂 Project Structure
 
 ```
-jsExpressOauthDb
-├───node_modules
-│   ├───...
-├───public
-│   ├───assets
-│   │   ├───icons
-│   │   │   ├───check-solid.svg
-│   │   │   └───pencil-solid.svg
-│   ├───images
-│   │   ├───faviconScreenshot.png
-│   │   ├───webAppScreenshot.jpg
-│   │   ├───blankBook.png
-│   │   ├───favicon.ico
-│   │   └───db_view.jpg
-│   ├───js
-│   │   └───utilityFunctions.js
-│   └───styles
-│       └───main.css
-├───views
-│   ├───partials
-│   │   ├───footer.ejs
-│   │   └───header.ejs
-│   ├───books
-│   ├───books.ejs
-│   ├───user
-│   ├───login.ejs
-│   └───register.ejs
+
+jsExprOauthDb
+├───public/
+│ ├───assets/icons/
+│ ├───images/
+│ ├───js/
+│ └───styles/
+├───views/
+│ ├───partials/
+│ ├───books.ejs
+│ ├───login.ejs
+│ └───register.ejs
 ├───.env
-├───LICENSE
 ├───.gitignore
 ├───index.js
-├───package-lock.json
+├───LICENSE
 ├───package.json
+├───package-lock.json
 └───README.md
+
 ```
 
-# **_Description of Project Creation:_**
+---
 
-## **_First Steps:_**
+## ⚙️ Installation / Getting Started
 
--   Download and setup the software required for a local database:
+### 1. Prerequisites
 
-    -   https://www.pgadmin.org/
+-   [Node.js](https://nodejs.org/)
+-   [PostgreSQL](https://www.postgresql.org/)
+-   [pgAdmin 4](https://www.pgadmin.org/)
+-   Terminal with Bash or Git Bash
 
-    -   https://www.postgresql.org/
-
--   Fork/download this repository, `jsExprOauthDb`.
-
--   Here are the standard steps/commands I intially use to create the Node.js/Express project...
-
--   Install Node.js: https://nodejs.org/en
-
--   In the Bash terminal, install the necessary Node.js libraries/resources:
+### 2. Install Node and Required Packages
 
 ```bash
 npm init -y
 npm install
-npm install pg
-npm install express
-npm install body-parser
-npm install ejs
-npm install dotenv
+npm install pg express body-parser ejs dotenv passport passport-local passport-google-oauth20
 ```
 
--   The project directory structure should look something like this:
+Also add this to your `package.json`:
 
-```
-├───jsCapstoneBook
-    ├───node_modules
-    │   ├───...
-    ├───public
-    │   ├───assets
-    │   │   └───icons
-    │   ├───images
-    │   └───styles
-    └───views
-        └───partials
+```json
+"type": "module"
 ```
 
--   Add `"type": "module",` to `package.json` file
+---
 
-## **_Background:_**
+## 🛢 Database Setup
 
--   This project is the culmination of a lot of hard work. I strive to understand, visualize and complete this project/assignment from Angela Yu's Web Development Bootcamp with thoroughness, accuracy and creativity.
+Use pgAdmin to create a new database:
 
--   I began studying Python, Web Development with Python, Math and Data Science in 2022 and have completed two Python Bootcamps and one Python/Math course, and am now taking Linear ALgebra and Statistics/Machine Learning with Python courses. I added JavaScript Coding and Web Development to my curriculum in 2023. The goal is to have a solid foundation of General Software development in both languages, and also to be versed in Front and Backend Web Development. Ultimately I'd like to contribute to the A.I. Alignment Discussion.
+-   Name: `js_capstone_book`
 
--   So far things are going well. I'm very comfortable with Python, and getting there with JavaScript. It's also helpful that I'm concurrently taking Colt Steele's JavaScript course on Udemy. This Capstone Project was very challenging. It really solidified my knowledge of how/when to pass variables back and forth between the .ejs and .js files. The logic there can be challenging for me, and this was a great opportunity to practice and become more fluent with making the web application run smoothly. I'm happy that this reinforced knowledge can be applied also to web development with Python/Flask.
-
-## **_Angela Yu's Instructions for this Project:_**
-
-#### **_Objectives:_**
-
--   Create a functioning Express/Node.js project which includes a PostgreSQL Database (create and accessed locally via pgAdmin 4).
-
--   Access and parse data from a remote API with JavaScript and asynchronous functions.
-
--   Deomonstrate fluency with JavaScript back and frontend development and Create/Read/Update/Delete data creation/manipulation both JavaScript database queries and using the pgAdmin query tool.
-
-#### **_Project Requirements:_**
-
--   Database Persistance
-
--   Project Planning
-
--   Project Setup
-
--   API Integration
-
--   Data Presentation
-
--   Error Handling
-
--   Documentation
-
--   Code Sharing
-
-#### **_How I Interpret the Instructions:_**
-
--   The suggested theme, which I utilize, is to incorporate book images into a list for reading suggestions in a creative, interesting way which the user could add to. THe OpenLibrary API is suggested, and I utilized a couple of its endpoints.
-
--   I create original HTML and CSS styling (and am happy with the result!), and compose all of the code from scratch, referring to my notes and researching any issues online, mainly at StackOverflow.
-
--   I generally try to avoid using ChatGPT, since I want to struggle as much as possible through the learning process to solidify my understanding independently, but when I got really stuck I did query this helpful tool. Once I complete the project I asked ChatGPT to look it over and make any suggestions, which I took to heart and learn from, and also to help with writing concise and incisive docstrings.
-
-## **_My Steps in Completing this Project:_**
-
-### **_1. Installing Node.js, PostgreSQL and pgAdmin, creating HTML/CSS Structure/Styling:_**
-
--   See above section **Requirements** for how I install the Node.js/Express packages.
-
--   The first step after intalling the required packages is designing an appealing structure/color/font schema for the website: see EJS and CSS files for the result.
-
--   Also I have fun designing a favicon in GIMP:
-
-![favicon](public/images/faviconScreenshot.png)
-
-### **_2. Setting up the Database in pdAdmin:_**
-
--   Create db `js_capstone_book`.
-
--   Use the Query Tool to:
+Then run this SQL via the Query Tool:
 
 ```sql
 CREATE TABLE book_recommendations (
-    id SERIAL PRIMARY KEY,
-	book_title VARCHAR(100) NOT NULL,
-	book_author VARCHAR(100),
-	book_url VARCHAR(100),
-	book_recommender VARCHAR(100)
-)
+  id SERIAL PRIMARY KEY,
+  book_title VARCHAR(100) NOT NULL,
+  book_author VARCHAR(100),
+  book_url VARCHAR(150),
+  book_recommender VARCHAR(100),
+  book_comments VARCHAR(1000),
+  date_added VARCHAR(15),
+  date_updated VARCHAR(15)
+);
 ```
 
--   Add entries to get things started:
+Insert starter rows:
 
 ```sql
 INSERT INTO book_recommendations (book_title, book_author, book_url, book_recommender)
-VALUES ('Flight Path', 'Jan David Blais', 'https://covers.openlibrary.org/b/isbn/0965460703-L.jpg', 'Andrew'),
-       ('Ubik', 'Philip K. Dick', 'https://covers.openlibrary.org/b/isbn/1857988531-L.jpg', 'Andrew'),
-       ('The Elephant in the Brain', 'Kevin Simler & Robin Hanson', 'https://covers.openlibrary.org/b/isbn/0197551955-L.jpg', 'Andrew');
+VALUES
+  ('Flight Path', 'Jan David Blais', 'https://covers.openlibrary.org/b/isbn/0965460703-L.jpg', 'Andrew'),
+  ('Ubik', 'Philip K. Dick', 'https://covers.openlibrary.org/b/isbn/1857988531-L.jpg', 'Andrew'),
+  ('The Elephant in the Brain', 'Kevin Simler & Robin Hanson', 'https://covers.openlibrary.org/b/isbn/0197551955-L.jpg', 'Andrew');
 ```
 
--   I increase the character allowance for the URL column:
+📸 Table preview:
 
-```sql
-ALTER TABLE book_recommendations
-ALTER COLUMN book_url TYPE VARCHAR(150);
-```
+![pgAdmin](public/images/db_view.jpg)
 
--   In pgAdmin, the table now appeare as:
+---
 
-![preliminary table view](public/images/db_view.jpg)
+## 🛠 Development Process
 
--   I later add columns for users to add comments, and to indicate when a book is added/updated. Here's the SQL code adding/altering the date columns, and the code adding the `book_comments` column to the database:
+### 1. Design & Frontend
 
-```sql
-ALTER TABLE book_recommendations
-ADD date_add VARCHAR(15);
+-   Handcrafted EJS views using original HTML & CSS
+-   Responsive layout with flex containers
+-   Custom favicon designed in GIMP
 
-ALTER TABLE book_recommendations
-ADD date_update VARCHAR(15);
+![favicon](public/images/faviconScreenshot.png)
 
-ALTER TABLE book_recommendations
-RENAME COLUMN date_add to date_added;
+---
 
-ALTER TABLE book_recommendations
-RENAME COLUMN date_update to date_updated;
+### 2. Backend Integration
 
-ALTER TABLE book_recommendations
-ADD book_comments VARCHAR(1000);
-```
+-   First tested frontend functionality using a local JS array
+-   Once routing and display were confirmed, transitioned to using PostgreSQL with proper `pg` queries
+-   Used `pgAdmin` Query Tool to test raw SQL before translating it into JS
 
-### **_3. Create the JavaScript:_**
-
--   The challenge is to smoothly access the database with JavaScript queries/commands.
-
--   Great care is taken to create forms where the user can input a book title or ISBN or edit the data for an existing book on the list, and to retrieve this in the backend and query the API, then updating the database so the frontend .ejs can retrieve the current list of books with the desired changes. This is a challenging step for me, making sure all of the HTML/EJS elements are named/id'd properly and the backend retrieves exactly the right data which is input.
-
--   In the main file `index.js` I built test all of the database functionality first by containing the book list data in an array. Once I got the HTML/EJS/CSS successfully integrate with `index.js`, I converted the functionality to access the pgAdmin database with proper queries. The array testing code is comment out in `index.js`
-
--   pgAdmin's Query Tool is quite helpful for testing SQL code before implementing it in JavaScript. The SQL to test inserting an entry:
-
-```sql
-INSERT INTO book_recommendations (book_title, book_author, book_url, book_recommender)
-VALUES ('The Lord of the Rings', 'J.R.R. Tolkien', 'https://a.media-amazon.com/images/I/7125+5E40JL._SL1500_.jpg', 'Andrew')
-```
-
--   The above pgAdmin query is the foundation from which I build the JavaScript:
+Example JavaScript insert query:
 
 ```js
 await db.query(
     `INSERT INTO book_recommendations
-            (book_title,
-            book_author,
-            book_url,
-            book_recommender,
-            date_added,
-            date_updated,
-            book_comments)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+     (book_title, book_author, book_url, book_recommender, date_added, date_updated, book_comments)
+   VALUES ($1, $2, $3, $4, $5, $6, $7)`,
     [
         resultBookData.title,
         resultBookData.author,
@@ -245,64 +157,62 @@ await db.query(
 );
 ```
 
--   I repeat the process, testing with the pgAdmin Query Tool and translating to JavaScript, with `DELETE` and `EDIT`.
+---
 
-### **_4. Sharing on GitHub:_**
+### 3. Authentication (OAuth)
 
--   I manually create the repository at [GitHub](https://github.com/), then use the following commands to get the ball rolling:
+-   Configured Passport.js for both local and Google OAuth 2.0
+-   Set up session handling and environment-based credential loading with `dotenv`
+-   Login/register flow built using `.ejs` templates
+
+See `notesOnOauth.ipynb` for a detailed breakdown of implementation steps.
+
+---
+
+### 4. Deploying to GitHub
 
 ```bash
-# Initialize a new Git repository in the current directory:
 git init
-
-# Add all files to the staging area, including respecting the .gitignore file:
 git add --all
-
-# Commit the staged files with a descriptive message:
 git commit -m "first commit"
-
-# Rename the current branch to `main` (common default branch name):
 git branch -M main
-
-# Add a remote repository with the name `origin` pointing to the specified GitHub URL:
 git remote add origin https://github.com/andrewblais/jsExprOauthDb.git
-
-# Push the `main` branch to the `origin` remote, and set `origin/main` as the upstream branch:
 git push -u origin main
 ```
 
-## **_Thoughts/Conclusions:_**
+---
 
--   The toughest parts of this project
+## 💡 Thoughts & Reflections
 
-    -   Creating original, interesting and appealing styling with CSS/HTML/EJS.
+### What Was Challenging
 
-    -   Setting up a Node.js project and making sure the directory/libraries are installed successfully.
+-   Designing clean, responsive layout with custom styling
+-   Naming and structuring form elements across `.ejs` and backend logic
+-   Getting familiar with `passport` and the Google OAuth flow
+-   Translating SQL logic into secure, parameterized JavaScript queries
 
-    -   Passing information between the front and backends with constistent, clean and effective JavaScript and HTML naming conventions for variables/user input. Creating the forms provided a challenge, also getting them to look good in their flex containers in a way that will respond to differently sized user devices/screens.
+### What Was Rewarding
 
-    -   Incorporating robust, manageable PostgreSQL queries with JavaScript.
+-   Seeing all parts of the app — frontend, backend, database, and auth — work together
+-   Building something practical from scratch
+-   Strengthening fluency in JavaScript and backend logic
 
-    -   The hardest part of creating the CSS was making the flex containers and ensuring their CSS properties were given values that work well in the flow of the desired appearance.
+### What I’d Improve
 
--   The less challenging aspects of this project:
+-   DRY out the CSS where possible for scalability
+-   Don’t over-perfect during early stages — get working first, refactor later
+-   Improve form validation and error feedback for users
 
-    -   Although the overall process of making this project was time-consuming, I felt in control and aware of all of the steps I needed to take. It was hard work, but I'm feeling much more fluent with JavaScript, Node.js, PostgreSQL and more advanced CSS conventions.
+---
 
--   What to improve on in future projects:
-
-    -   Consider making the CSS more compact. Although it's easier to read and maintain different tag/class properties when I repeat code for each element, in a larger web application it will become necessary to conserve resources.
-
-    -   Don't get bogged down with details along the way. It's important to get work done without worrying about perfection. Be patient and know that subsequent drafts/refactoring is a part of the process.
-
-    -   Consider the most effective approach to JavaScript, use functions intended to save code/processing time.
-
--   Overall, a fun, satisfying project, I'm happy with the work and learned a lot!
-
-_Andrew Blais, September 1, 2024_
-
--   A screenshot of the Web Application's destination page:
+📸 Final Screenshot
 
 ![screenshot](public/images/webAppScreenshot.jpg)
 
-# jsExprOauthDb
+---
+
+_Andrew Blais, Boston, Massachusetts_
+
+📖 Student of full-stack web development, machine learning, and software engineering  
+🏠 Boston, Massachusetts  
+🔗 [GitHub](https://github.com/andrewblais) | [Portfolio](https://andrewblais.dev)
